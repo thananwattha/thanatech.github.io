@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thana Tech Company Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Prompt:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Prompt', sans-serif;
+            background: linear-gradient(135deg, #2B2E33 0%, #000000 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Cover Page Styles */
+        .cover-page {
+            background: linear-gradient(135deg, #2B2E33 0%, #1a1c20 50%, #000000 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(201, 164, 92, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(201, 164, 92, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(201, 164, 92, 0.5));
+        }
+
+        .cover-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 160px 40px 80px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .main-headline {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: clamp(48px, 8vw, 90px);
+            color: white;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .main-headline::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #C9A45C, transparent);
+        }
+
+        .sub-headline {
+            font-family: 'Prompt', sans-serif;
+            font-weight: 600;
+            font-size: clamp(28px, 5vw, 48px);
+            color: #C9A45C;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 10px rgba(201, 164, 92, 0.3);
+        }
+
+        .body-text {
+            font-size: clamp(18px, 3vw, 36px);
+            line-height: 1.6;
+            max-width: 900px;
+            margin-bottom: 60px;
+            opacity: 0.95;
+        }
+
+        .contact-info {
+            font-size: 18px;
+            color: #C9A45C;
+            border: 1px solid #C9A45C;
+            padding: 15px 30px;
+            border-radius: 30px;
+            background: rgba(201, 164, 92, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Tech Pattern Background */
+        .tech-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background-image: 
+                linear-gradient(45deg, transparent 40%, rgba(201, 164, 92, 0.1) 50%, transparent 60%),
+                linear-gradient(-45deg, transparent 40%, rgba(201, 164, 92, 0.1) 50%, transparent 60%);
+            background-size: 100px 100px;
+            animation: techFlow 20s linear infinite;
+        }
+
+        @keyframes techFlow {
+            0% { transform: translateX(-100px) translateY(-100px); }
+            100% { transform: translateX(100px) translateY(100px); }
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(201, 164, 92, 0.3);
+            border: 2px solid #C9A45C;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn.active {
+            background: #C9A45C;
+            transform: scale(1.2);
+        }
+
+        .nav-btn:hover {
+            background: #C9A45C;
+            transform: scale(1.1);
+        }
+
+        /* About Page */
+        .about-page {
+            background: linear-gradient(to bottom, #C9A45C 0%, #C9A45C 5%, #FFFFFF 5%, #FFFFFF 95%, #C9A45C 95%, #C9A45C 100%);
+            color: #2B2E33;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            padding: 80px 60px;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #2B2E33, #C9A45C);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '🏢';
+            font-size: 120px;
+            opacity: 0.8;
+        }
+
+        .about-text h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 48px;
+            color: #C9A45C;
+            margin-bottom: 30px;
+        }
+
+        .about-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .icons-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .icon-item {
+            text-align: center;
+            color: #C9A45C;
+            font-weight: 600;
+        }
+
+        .icon-item span {
+            display: block;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        /* Services Page */
+        .services-page {
+            background: #2B2E33;
+            position: relative;
+        }
+
+        .services-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 0%, #C9A45C 50%, transparent 100%),
+                linear-gradient(0deg, transparent 0%, #C9A45C 50%, transparent 100%);
+            background-size: 200px 200px;
+            opacity: 0.05;
+        }
+
+        .services-content {
+            padding: 80px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .services-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 48px;
+            color: #C9A45C;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(201, 164, 92, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: #C9A45C;
+            box-shadow: 0 10px 30px rgba(201, 164, 92, 0.2);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #C9A45C;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: white;
+            line-height: 1.6;
+        }
+
+        .services-footer {
+            text-align: center;
+            font-size: 20px;
+            color: #C9A45C;
+            font-style: italic;
+        }
+
+        /* Tech Stack Page */
+        .tech-page {
+            background: white;
+            color: #2B2E33;
+            position: relative;
+        }
+
+        .tech-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, transparent 48%, rgba(201, 164, 92, 0.1) 50%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(201, 164, 92, 0.1) 50%, transparent 52%);
+            background-size: 50px 50px;
+        }
+
+        .tech-content {
+            padding: 80px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tech-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 48px;
+            color: #C9A45C;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .tech-category {
+            background: rgba(201, 164, 92, 0.05);
+            border: 2px solid rgba(201, 164, 92, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .tech-category h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #C9A45C;
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .tech-category .icon {
+            font-size: 32px;
+        }
+
+        .tech-list {
+            color: #2B2E33;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .tech-footer {
+            text-align: center;
+            font-size: 20px;
+            color: #C9A45C;
+            font-style: italic;
+        }
+
+        /* Integration Page */
+        .integration-page {
+            background: linear-gradient(135deg, #2B2E33 0%, rgba(201, 164, 92, 0.1) 100%);
+        }
+
+        .integration-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            padding: 80px 60px;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .integration-text h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 42px;
+            color: #C9A45C;
+            margin-bottom: 30px;
+        }
+
+        .integration-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .flow-item {
+            text-align: center;
+            color: #C9A45C;
+            font-weight: 600;
+        }
+
+        .flow-item .icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .flow-arrow {
+            font-size: 24px;
+            color: #C9A45C;
+            margin: 0 10px;
+        }
+
+        .integration-quote {
+            text-align: center;
+            font-size: 24px;
+            color: #C9A45C;
+            font-style: italic;
+            margin-top: 40px;
+            grid-column: 1 / -1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-content,
+            .integration-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 20px;
+            }
+
+            .services-content,
+            .tech-content {
+                padding: 40px 20px;
+            }
+
+            .cover-content {
+                padding: 120px 20px 60px;
+            }
+
+            .main-headline {
+                font-size: 36px;
+            }
+
+            .sub-headline {
+                font-size: 24px;
+            }
+
+            .body-text {
+                font-size: 18px;
+            }
+
+            .flow-diagram {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .icons-row {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="nav-btn active" onclick="showPage(0)"></div>
+        <div class="nav-btn" onclick="showPage(1)"></div>
+        <div class="nav-btn" onclick="showPage(2)"></div>
+        <div class="nav-btn" onclick="showPage(3)"></div>
+        <div class="nav-btn" onclick="showPage(4)"></div>
+    </div>
+
+    <!-- Page 1: Cover Page -->
+    <div class="page cover-page" id="page-0">
+        <div class="tech-pattern"></div>
+        <div class="logo-container">
+            <img src="https://drive.google.com/uc?export=view&id=1AwC2EsFvtVAvvWaSxVll6AsEg3iJWtXD" alt="Thana Tech Logo" class="logo" onerror="this.style.display='none';">
+        </div>
+        <div class="cover-content">
+            <h1 class="main-headline">THANA TECH CO., LTD.</h1>
+            <h2 class="sub-headline">Your Trusted Partner in Technology Development</h2>
+            <p class="body-text">รับออกแบบ พัฒนา และติดตั้งระบบครบวงจร ทั้ง Web Mobile Cloud และ AI สำหรับองค์กรยุคดิจิทัล</p>
+            <div class="contact-info">
+                www.thanatech.net | thananwat.tha@thanatech.net
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 2: About Us -->
+    <div class="page about-page" id="page-1" style="display: none;">
+        <div class="about-content">
+            <div class="about-image"></div>
+            <div class="about-text">
+                <h2>เกี่ยวกับเรา / About Us</h2>
+                <p>Thana Tech เป็นทีมผู้เชี่ยวชาญด้านเทคโนโลยี กว่า 30 ปี ในสาย IT Software และ Cloud Infrastructure มุ่งเน้นการให้บริการ พัฒนา และติดตั้งระบบ ครบวงจร เพื่อเพิ่มประสิทธิภาพให้ธุรกิจองค์กร</p>
+                <p><strong>Over 30 years of expertise in software engineering and enterprise technology solutions — delivering innovation with security and quality.</strong></p>
+                <div class="icons-row">
+                    <div class="icon-item">
+                        <span>💡</span>
+                        Innovation
+                    </div>
+                    <div class="icon-item">
+                        <span>⚙️</span>
+                        System Integration
+                    </div>
+                    <div class="icon-item">
+                        <span>☁️</span>
+                        Cloud
+                    </div>
+                    <div class="icon-item">
+                        <span>🤖</span>
+                        AI/Automation
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 3: Our Services -->
+    <div class="page services-page" id="page-2" style="display: none;">
+        <div class="services-content">
+            <h2 class="services-title">บริการของเรา / Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-icon">🌐</span>
+                    <h3>Website Development</h3>
+                    <p>พัฒนาเว็บไซต์ที่ทันสมัย รองรับทุกอุปกรณ์ และเพิ่มประสิทธิภาพธุรกิจ</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">📱</span>
+                    <h3>Mobile App Development</h3>
+                    <p>สร้างแอปพลิเคชันมือถือที่ใช้งานง่าย และตอบสนองความต้องการผู้ใช้</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🔗</span>
+                    <h3>System Integration</h3>
+                    <p>เชื่อมต่อระบบต่างๆ ให้ทำงานร่วมกันอย่างราบรื่นและมีประสิทธิภาพ</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">☁️</span>
+                    <h3>Cloud & DevOps</h3>
+                    <p>บริการ Cloud Infrastructure และ DevOps เพื่อเพิ่มความเสถียรของระบบ</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🤖</span>
+                    <h3>AI & Automation</h3>
+                    <p>นำ AI และระบบอัตโนมัติมาช่วยเพิ่มประสิทธิภาพการทำงาน</p>
+                </div>
+            </div>
+            <p class="services-footer">Empowering business through technology innovation.</p>
+        </div>
+    </div>
+
+    <!-- Page 4: Technology Stack -->
+    <div class="page tech-page" id="page-3" style="display: none;">
+        <div class="tech-content">
+            <h2 class="tech-title">เทคโนโลยีที่เชี่ยวชาญ / Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-category">
+                    <h3><span class="icon">💻</span>Frontend</h3>
+                    <div class="tech-list">React, Angular, Next.js, Vue.js</div>
+                </div>
+                <div class="tech-category">
+                    <h3><span class="icon">⚙️</span>Backend</h3>
+                    <div class="tech-list">NestJS, Spring Boot, .NET, PowerBuilder</div>
+                </div>
+                <div class="tech-category">
+                    <h3><span class="icon">💾</span>Database</h3>
+                    <div class="tech-list">PostgreSQL, MySQL, SQL Server, Oracle, Sybase</div>
+                </div>
+                <div class="tech-category">
+                    <h3><span class="icon">☁️</span>Cloud</h3>
+                    <div class="tech-list">AWS, Google Cloud Platform, Microsoft Azure</div>
+                </div>
+                <div class="tech-category">
+                    <h3><span class="icon">🔧</span>DevOps & Tools</h3>
+                    <div class="tech-list">Docker, Kubernetes, Git, CI/CD, N8N</div>
+                </div>
+                <div class="tech-category">
+                    <h3><span class="icon">🧠</span>AI & Data</h3>
+                    <div class="tech-list">Large Language Models, Machine Learning, Data Analytics</div>
+                </div>
+            </div>
+            <p class="tech-footer">Combining diverse technologies for seamless enterprise solutions.</p>
+        </div>
+    </div>
+
+    <!-- Page 5: Technology Integration -->
+    <div class="page integration-page" id="page-4" style="display: none;">
+        <div class="integration-content">
+            <div class="integration-text">
+                <h2>การบูรณาการเทคโนโลยี / Technology Integration</h2>
+                <p>เราเชื่อมต่อทุก layer ของระบบ ตั้งแต่ Frontend → API → Database → Cloud → AI Automation เพื่อสร้างระบบที่ทำงานร่วมกันอย่างสมบูรณ์แบบ</p>
+                <p><strong>We integrate every layer of your system from Frontend to AI Automation, creating a seamless technology ecosystem that drives business growth.</strong></p>
+            </div>
+            <div class="flow-diagram">
+                <div class="flow-item">
+                    <span class="icon">💻</span>
+                    Frontend
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">
+                    <span class="icon">⚙️</span>
+                    Backend
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">
+                    <span class="icon">💾</span>
+                    Database
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">
+                    <span class="icon">☁️</span>
+                    Cloud
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">
+                    <span class="icon">🤖</span>
+                    AI
+                </div>
+            </div>
+            <p class="integration-quote">"Integrating Innovation for a Smarter Future."</p>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 0;
+        const totalPages = 5;
+
+        function showPage(pageIndex) {
+            // Hide all pages
+            for (let i = 0; i < totalPages; i++) {
+                document.getElementById(`page-${i}`).style.display = 'none';
+                document.querySelectorAll('.nav-btn')[i].classList.remove('active');
+            }
+            
+            // Show selected page
+            document.getElementById(`page-${pageIndex}`).style.display = 'block';
+            document.querySelectorAll('.nav-btn')[pageIndex].classList.add('active');
+            currentPage = pageIndex;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' && currentPage < totalPages - 1) {
+                showPage(currentPage + 1);
+            } else if (e.key === 'ArrowLeft' && currentPage > 0) {
+                showPage(currentPage - 1);
+            }
+        });
+
+        // Touch/swipe support for mobile
+        let startX = 0;
+        let endX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            endX = e.changedTouches[0].clientX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentPage < totalPages - 1) {
+                    // Swipe left - next page
+                    showPage(currentPage + 1);
+                } else if (diff < 0 && currentPage > 0) {
+                    // Swipe right - previous page
+                    showPage(currentPage - 1);
+                }
+            }
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'992ea562109bee5a',t:'MTc2MTE5NTM2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
